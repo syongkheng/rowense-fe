@@ -35,14 +35,14 @@ const HomePage = () => {
         </div>
         <SquareSpacing spacing={SpacingSize.Large} />
         <div className='action'>
-          <Button
+          {/* <Button
             id="gpt"
             onClick={() => handleGpt()}
             fullWidth
             sx={StyleButtonPrimary}
           >
             GPT
-          </Button>
+          </Button> */}
         </div>
         <SquareSpacing spacing={SpacingSize.Large} />
         <div className='coming-soon-container'>
