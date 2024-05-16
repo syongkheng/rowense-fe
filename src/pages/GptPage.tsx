@@ -45,7 +45,7 @@ const GptPage = () => {
 
   const handleSendRequest = async () => {
     await setIsLoading(true);
-    const res = await axiosInstance.post(`${import.meta.env.VITE_APP_URL}/gpt`, { payload })
+    await axiosInstance.post(`${import.meta.env.VITE_APP_URL}/gpt`, { payload })
       .then((res) => {
         console.log("Test:", res["data"]["data"])
       }).catch((err) => {
@@ -58,7 +58,7 @@ const GptPage = () => {
         }))
       })
 
-    const messages = axiosInstance.get("/messages").then((res) => {
+    axiosInstance.get("/messages").then((res) => {
       setMessages(res["data"]["data"])
     }).catch((err) => {
       console.error("Catch: ", err);

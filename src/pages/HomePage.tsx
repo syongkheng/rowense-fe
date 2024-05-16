@@ -1,4 +1,3 @@
-import React from 'react';
 import "../css/HomePage.css";
 import { Button } from '@mui/material';
 import { StyleButtonPrimary } from '../styling/ButtonPrimary';

@@ -1,4 +1,4 @@
-import { SpacingSize } from ".."
+import { SpacingSize } from "./SquareSpacing.enum"
 
 
 interface ISquareSpacing {

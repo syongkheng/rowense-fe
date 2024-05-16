@@ -4,7 +4,6 @@ import { Button, TextField } from "@mui/material";
 import SquareSpacing from "../components/spacing/SquareSpacing";
 import { SpacingSize } from "../components/spacing/SquareSpacing.enum";
 import { StyleButtonPrimary } from "../styling/ButtonPrimary";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../middleware/axios-interceptor";
 
