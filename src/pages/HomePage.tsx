@@ -18,7 +18,9 @@ const HomePage = () => {
   const { username } = jwtDecode(token) as ICustomPayload;
 
   const handleGpt = async () => {
-    navigate("/gpt");
+    // navigate("/gpt");
+    navigate('/home');
+    console.log("Clicked");
   }
 
   return (
@@ -35,14 +37,14 @@ const HomePage = () => {
         </div>
         <SquareSpacing spacing={SpacingSize.Large} />
         <div className='action'>
-          {/* <Button
+          <Button
             id="gpt"
             onClick={() => handleGpt()}
             fullWidth
             sx={StyleButtonPrimary}
           >
             GPT
-          </Button> */}
+          </Button>
         </div>
         <SquareSpacing spacing={SpacingSize.Large} />
         <div className='coming-soon-container'>
