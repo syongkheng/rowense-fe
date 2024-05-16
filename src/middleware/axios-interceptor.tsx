@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: "here",
+  baseURL: import.meta.env.VITE_APP_URL, // Replace with your API base URL
 });
 
 // Add a request interceptor
