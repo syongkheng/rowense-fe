@@ -29,3 +29,8 @@
     }
   }
 }
+
+.error-message {
+  color: #333333;
+  font-size: 16px;
+}
