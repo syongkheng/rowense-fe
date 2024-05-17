@@ -13,6 +13,7 @@ interface IPayload {
 }
 
 interface IMessage {
+  created_dt: string | number | Date;
   content: string;
   isSender: 1 | 0;
 }
@@ -103,17 +104,18 @@ const GptPage = () => {
           <div className='notice'>
             <span className='text'>目前只能显示最近的10个消息...</span>
           </div>
-          {messages.length > 0 && messages?.reverse().map((msg, index) => {
-            return (
-              <div key={index} className={`message-container-anchor${msg.isSender ? ' rr' : ''}`}>
-                <div className='message-container'>
-                  <span className='message'>
-                    {msg.isSender ? null : 'GPT: '}{msg.content}
-                  </span>
+          {messages.length > 0 && messages?.sort((a: IMessage, b: IMessage) => new Date(a.created_dt).getTime() - new Date(b.created_dt).getTime())
+            .map((msg, index) => {
+              return (
+                <div key={index} className={`message-container-anchor${msg.isSender ? ' rr' : ''}`}>
+                  <div className='message-container'>
+                    <span className='message'>
+                      {msg.isSender ? null : 'GPT: '}{msg.content}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
 
         </div>
         <SquareSpacing spacing={SpacingSize.Medium} />
