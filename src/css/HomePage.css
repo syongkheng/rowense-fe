@@ -42,6 +42,15 @@
   }
 }
 
+@media(max-width: 586px) {
+  .home-page-container {
+    >.menu {
+      width: 80vw;
+      max-width: 80vw;
+    }
+  }
+}
+
 .row {
   width: 100%;
 }

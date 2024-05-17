@@ -34,3 +34,12 @@
   color: #333333;
   font-size: 16px;
 }
+
+@media (max-width: 586px) {
+  .landing-page-container {
+    >.login-modal {
+      width: 80vw;
+      max-width: 80vw;
+    }
+  }
+}

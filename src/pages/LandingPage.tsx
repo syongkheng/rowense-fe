@@ -21,8 +21,6 @@ export default function LandingPage() {
     password: '',
   })
 
-  const [status, setStatus] = React.useState<string>("目前没有");
-
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLoginForm((prevForm) => ({
       ...prevForm,
@@ -31,18 +29,14 @@ export default function LandingPage() {
   }
 
   const handleLogin = async () => {
-    setStatus("正在尝试登入")
     const response = await axiosInstance.post(`/login`, loginForm)
       .then((res) => {
         console.log("Then: ", res);
         const jwt = res["data"]["data"];
         window.sessionStorage.setItem("jwt", jwt);
         navigate("/home");
-        setStatus("成功")
       }).catch((err) => {
         console.log("Catch: ", JSON.stringify(err));
-        setStatus(JSON.stringify(err));
-
       });
 
     console.log("My resposne is: ", response);
@@ -90,8 +84,6 @@ export default function LandingPage() {
               登入
             </Button>
           </div>
-          <span className="error-message">报错：{status}</span>
-
         </div>
       </div>
     </>
