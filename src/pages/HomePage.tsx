@@ -18,9 +18,7 @@ const HomePage = () => {
   const { username } = jwtDecode(token) as ICustomPayload;
 
   const handleGpt = async () => {
-    // navigate("/gpt");
-    navigate('/home');
-    console.log("Clicked");
+    navigate("/gpt");
   }
 
   return (
