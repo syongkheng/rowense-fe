@@ -103,7 +103,7 @@ const GptPage = () => {
           <div className='notice'>
             <span className='text'>目前只能显示最近的10个消息...</span>
           </div>
-          {messages?.map((msg, index) => {
+          {messages?.reverse().map((msg, index) => {
             return (
               <div key={index} className={`message-container-anchor${msg.isSender ? ' rr' : ''}`}>
                 <div className='message-container'>
