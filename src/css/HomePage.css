@@ -18,14 +18,21 @@
     justify-content: center;
 
     >.title-container {
-      >.title {
-        color: #333333;
-        font-size: 24px;
-      }
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
 
-      >.description {
-        color: #333333;
-        font-size: 16px;
+      >.info-box {
+        >.title {
+          color: #333333;
+          font-size: 24px;
+        }
+
+        >.description {
+          color: #333333;
+          font-size: 16px;
+        }
       }
     }
 

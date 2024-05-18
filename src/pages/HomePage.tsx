@@ -5,6 +5,7 @@ import SquareSpacing from '../components/spacing/SquareSpacing';
 import { SpacingSize } from '../components/spacing/SquareSpacing.enum';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
+import { StyleButtonSecondary } from "../styling/ButtonSecondary";
 
 interface ICustomPayload {
   username: string;
@@ -21,17 +22,34 @@ const HomePage = () => {
     navigate("/gpt");
   }
 
+  const handleLogout = () => {
+    window.sessionStorage.removeItem("jwt");
+    navigate("/");
+  }
+
   return (
     <div className='home-page-container'>
       <div className='menu'>
         <div className='title-container'>
-          <span className='title'>
-            欢迎 {username},
-          </span>
-          <br />
-          <span className='description'>
-            以下请选一
-          </span>
+          <div className="info-box">
+            <span className='title'>
+              欢迎 {username},
+            </span>
+            <br />
+            <span className='description'>
+              以下请选一
+            </span>
+          </div>
+          <div className="actions">
+            <Button
+              id="logout"
+              onClick={() => handleLogout()}
+              fullWidth
+              sx={StyleButtonSecondary}
+            >
+              退出账号
+            </Button>
+          </div>
         </div>
         <SquareSpacing spacing={SpacingSize.Large} />
         <div className='action'>

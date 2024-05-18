@@ -33,6 +33,7 @@ export default function LandingPage() {
       .then((res) => {
         console.log("Then: ", res);
         const jwt = res["data"]["data"];
+        console.log("Ip: ", res.data.ip);
         window.sessionStorage.setItem("jwt", jwt);
         navigate("/home");
       }).catch((err) => {
