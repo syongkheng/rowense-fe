@@ -1,0 +1,45 @@
+.landing-page-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333333;
+
+  >.login-modal {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    max-width: 25vw;
+    background-color: #efefef;
+    padding: 2vw 2vh;
+    border-radius: 6px;
+    justify-content: center;
+
+    >.title-container {
+      >.title-text {
+        color: #333333;
+        font-size: 24px;
+      }
+    }
+
+    >.login-button-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+.error-message {
+  color: #333333;
+  font-size: 16px;
+}
+
+@media (max-width: 586px) {
+  .landing-page-container {
+    >.login-modal {
+      width: 80vw;
+      max-width: 80vw;
+    }
+  }
+}

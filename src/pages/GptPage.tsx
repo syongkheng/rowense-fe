@@ -59,7 +59,7 @@ const GptPage = () => {
         }))
       })
 
-    axiosInstance.get("/messages").then((res) => {
+    axiosInstance.get("/api/messages").then((res) => {
       setMessages(res["data"]["data"])
     }).catch((err) => {
       console.error("Catch: ", err);
@@ -70,7 +70,7 @@ const GptPage = () => {
   }
 
   React.useEffect(() => {
-    axiosInstance.get("/messages").then((res) => {
+    axiosInstance.get("/api/messages").then((res) => {
       setMessages(res["data"]["data"])
     }).catch((err) => {
       console.error("Catch: ", err);
