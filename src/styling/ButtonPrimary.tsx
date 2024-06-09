@@ -1,4 +1,5 @@
 export const StyleButtonPrimary = {
+  textTransform: 'none',
   background: '#333333',
   color: '#efefef',
   minWidth: '150px',

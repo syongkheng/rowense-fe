@@ -4,14 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333333;
+  background-color: #efefef;
+  color: #333333;
 
   >.menu {
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    max-width: 25vw;
-    background-color: #efefef;
+    width: 45vw;
+    max-width: 45vw;
     padding: 0 2vw;
     padding-top: 2vh;
     border-radius: 6px;

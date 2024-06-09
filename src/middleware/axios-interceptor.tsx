@@ -24,4 +24,16 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+// Disable console.error for Axios request errors
+axiosInstance.interceptors.response.use(
+  response => {
+    // If the response is successful, return it unchanged
+    return response;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+
 export default axiosInstance;

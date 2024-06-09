@@ -6,19 +6,21 @@ import { SpacingSize } from '../components/spacing/SquareSpacing.enum'
 import '../css/LandingPage.css'
 import { ISectionInfo } from '../models/copywriting/LandingPage.model'
 import { Button } from '@mui/material'
-import BtnPrimary from '../styles/Button'
 import { AppStorageUtil } from '../utils/AppStorageUtil'
 import { Locale } from '../enums'
+import { useNavigate } from 'react-router-dom'
+import { StyleButtonPrimary } from '../styling/ButtonPrimary'
 
 export default function LandingPage() {
 
+  const navigate = useNavigate();
   const [locale, setLocale] = React.useState<string>(AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
 
   const [copywriting, setCopywriting] = React.useState<ISectionInfo[] | null>(null);
   const [buttonLabel, setButtonLabel] = React.useState('');
 
   useEffect(() => {
-    import(`../copywriting/${locale}/LandingPage`).then((module) => {
+    import(`../copywriting/${locale}/LandingPage.ts`).then((module) => {
       const { sectionInfo, buttonLabel } = module.default();
       setCopywriting(sectionInfo);
       setButtonLabel(buttonLabel)
@@ -26,7 +28,7 @@ export default function LandingPage() {
   }, [locale])
 
   const handleTryNow = () => {
-    console.log("Navigate to login/register page.")
+    navigate("/login");
   }
 
   return (
@@ -59,12 +61,14 @@ export default function LandingPage() {
               )
             })
           }
-          <Button
-            sx={BtnPrimary()}
-            onClick={() => handleTryNow()}
-          >
-            {buttonLabel}
-          </Button>
+          <div className='try-now'>
+            <Button
+              onClick={() => handleTryNow()}
+              sx={StyleButtonPrimary}
+            >
+              {buttonLabel}
+            </Button>
+          </div>
           <SquareSpacing spacing={SpacingSize.ExtraLarge} />
         </div>
       </div>

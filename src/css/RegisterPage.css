@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #efefef;
@@ -33,6 +34,11 @@
       justify-content: center;
     }
   }
+}
+
+.form-errors{
+  color: #CE0000;
+  margin: 3px 0;
 }
 
 @media (max-width: 586px) {

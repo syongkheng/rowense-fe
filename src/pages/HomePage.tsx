@@ -6,6 +6,11 @@ import { SpacingSize } from '../components/spacing/SquareSpacing.enum';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import { StyleButtonSecondary } from "../styling/ButtonSecondary";
+import { AppStorageUtil } from "../utils/AppStorageUtil";
+import React from "react";
+import { Locale } from "../enums";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 
 interface ICustomPayload {
   username: string;
@@ -13,64 +18,117 @@ interface ICustomPayload {
 }
 
 const HomePage = () => {
-  const navigate = useNavigate();
 
-  const token = window.sessionStorage.getItem("jwt") as string ?? '';
+  const navigate = useNavigate();
+  const [locale, setLocale] = React.useState<string>(AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
+  const token = AppStorageUtil.getSession(AppStorageUtil.Keys.Jwt) ?? ''
   const { username } = jwtDecode(token) as ICustomPayload;
+  const [copywriting, setCopywriting] = React.useState({
+    titleLabel: '',
+    subtitleLabel: '',
+    comingSoonLabel: '',
+    service: {} as any,
+    button: {} as any,
+  })
+
+  React.useEffect(() => {
+    import(`../copywriting/${locale}/HomePage.ts`).then((module) => {
+      const {
+        titleLabel,
+        subtitleLabel,
+        comingSoonLabel,
+        service,
+        button,
+      } = module.default();
+      setCopywriting({
+        titleLabel,
+        subtitleLabel,
+        comingSoonLabel,
+        service,
+        button,
+      });
+    })
+  }, [locale])
 
   const handleGpt = async () => {
     navigate("/gpt");
   }
 
   const handleLogout = () => {
-    window.sessionStorage.removeItem("jwt");
+    AppStorageUtil.removeSession(AppStorageUtil.Keys.Jwt);
     navigate("/");
   }
 
   return (
-    <div className='home-page-container'>
-      <div className='menu'>
-        <div className='title-container'>
-          <div className="info-box">
-            <span className='title'>
-              欢迎 {username},
-            </span>
-            <br />
-            <span className='description'>
-              以下请选一
-            </span>
+    <>
+      <Header setLocale={setLocale} />
+      <div className='home-page-container'>
+        <div className='menu'>
+          <div className='title-container'>
+            <div className="info-box">
+              <span className='title'>
+                {copywriting.titleLabel} {username},
+              </span>
+              <br />
+              <span className='description'>
+                {copywriting.subtitleLabel}
+              </span>
+            </div>
+            <div className="actions">
+              <Button
+                id="logout"
+                onClick={() => handleLogout()}
+                fullWidth
+                sx={StyleButtonSecondary}
+              >
+                {copywriting.button.logout}
+              </Button>
+            </div>
           </div>
-          <div className="actions">
+          <SquareSpacing spacing={SpacingSize.Large} />
+          <div className='action'>
             <Button
-              id="logout"
-              onClick={() => handleLogout()}
+              id="gpt"
+              onClick={() => handleGpt()}
               fullWidth
-              sx={StyleButtonSecondary}
+              sx={StyleButtonPrimary}
             >
-              退出账号
+              {copywriting.service.gpt}
             </Button>
           </div>
-        </div>
-        <SquareSpacing spacing={SpacingSize.Large} />
-        <div className='action'>
-          <Button
-            id="gpt"
-            onClick={() => handleGpt()}
-            fullWidth
-            sx={StyleButtonPrimary}
-          >
-            GPT
-          </Button>
-        </div>
-        <SquareSpacing spacing={SpacingSize.Large} />
-        <div className='coming-soon-container'>
-          <div className='coming-soon'>
-            {"待更新 :)"}
+          <SquareSpacing spacing={SpacingSize.Large} />
+          <div className='action'>
+            <Button
+              id="gpt"
+              onClick={() => handleGpt()}
+              fullWidth
+              sx={StyleButtonPrimary}
+            >
+              {copywriting.service.tiktokStreamWatcher}
+            </Button>
           </div>
+          <SquareSpacing spacing={SpacingSize.Large} />
+          <div className='action'>
+            <Button
+              id="gpt"
+              onClick={() => handleGpt()}
+              fullWidth
+              sx={StyleButtonPrimary}
+            >
+              {copywriting.service.douyinStreamWatcher}
+            </Button>
+          </div>
+          <SquareSpacing spacing={SpacingSize.Large} />
+          <div className='coming-soon-container'>
+            <div className='coming-soon'>
+              {copywriting.comingSoonLabel}
+            </div>
+          </div>
+          <SquareSpacing spacing={SpacingSize.Large} />
         </div>
-        <SquareSpacing spacing={SpacingSize.Large} />
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

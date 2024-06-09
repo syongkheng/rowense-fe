@@ -1,6 +1,6 @@
 import { ISectionInfo } from "../../models/copywriting/LandingPage.model";
 
-export default function copywritingLandingPageEn() {
+export default function copywritingCn() {
 
   const sectionInfo: ISectionInfo[] = [
     {
@@ -26,5 +26,8 @@ export default function copywritingLandingPageEn() {
   ]
   const buttonLabel = '立马体验!';
 
-  return { sectionInfo, buttonLabel };
+  return { 
+    sectionInfo, 
+    buttonLabel 
+  };
 }

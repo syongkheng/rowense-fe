@@ -18,7 +18,6 @@ export default function Header({
   const [language, setLanguage] = React.useState<string>(AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
 
   React.useEffect(() => {
-    console.log("hi")
     AppStorageUtil.setLocal(AppStorageUtil.Keys.Locale, AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
   }, [])
 
