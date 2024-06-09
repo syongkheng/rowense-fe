@@ -18,7 +18,6 @@ interface ICustomPayload {
 }
 
 const HomePage = () => {
-
   const navigate = useNavigate();
   const [locale, setLocale] = React.useState<string>(AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
   const token = AppStorageUtil.getSession(AppStorageUtil.Keys.Jwt) ?? ''
@@ -60,7 +59,6 @@ const HomePage = () => {
   const handleDouyinStreamWatcher = () => {
     console.log("Douyin")
   }
-
 
   const handleLogout = () => {
     AppStorageUtil.removeSession(AppStorageUtil.Keys.Jwt);

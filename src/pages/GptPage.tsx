@@ -7,6 +7,10 @@ import { StyleButtonPrimary } from '../styling/ButtonPrimary';
 import { StyleButtonSecondary } from '../styling/ButtonSecondary';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../middleware/axios-interceptor';
+import Footer from '../components/footer/Footer';
+import Header from '../components/header/Header';
+import { AppStorageUtil } from '../utils/AppStorageUtil';
+import { Locale } from '../enums';
 
 interface IPayload {
   message: string;
@@ -21,6 +25,31 @@ interface IMessage {
 const GptPage = () => {
 
   const navigate = useNavigate();
+  const [locale, setLocale] = React.useState<string>(AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
+  const [copywriting, setCopywriting] = React.useState({
+    titleLabel: '',
+    recentMessageLabel: '',
+    sendMessagePrompt: '',
+    button: {} as any, 
+  });
+
+  React.useEffect(() => {
+    import(`../copywriting/${locale}/GptPage.ts`).then((module) => {
+      const {
+        titleLabel,
+        recentMessageLabel,
+        sendMessagePrompt,
+        button,
+      } = module.default();
+      setCopywriting({
+        titleLabel,
+        recentMessageLabel,
+        sendMessagePrompt,
+        button,
+      });
+    })
+  }, [locale])
+
 
   const [payload, setPayload] = React.useState<IPayload>({
     message: ''
@@ -82,69 +111,73 @@ const GptPage = () => {
   }
 
   return (
-    <div className='gpt-page-container'>
-      <div className='dialog-container'>
-        <div className='title-container'>
-          <div className='title'>
-            GPT
+    <>
+      <Header setLocale={setLocale} />
+      <div className='gpt-page-container'>
+        <div className='dialog-container'>
+          <div className='title-container'>
+            <div className='title'>
+              {copywriting.titleLabel}
+            </div>
+            <div className='secondary-action'>
+              <Button
+                id='btn-back'
+                onClick={() => handleBack()}
+                sx={StyleButtonSecondary}
+                disabled={isLoading}
+              >
+                {copywriting.button.return}
+              </Button>
+            </div>
           </div>
-          <div className='secondary-action'>
-            <Button
-              id='btn-back'
-              onClick={() => handleBack()}
-              sx={StyleButtonSecondary}
-              disabled={isLoading}
-            >
-              返回
-            </Button>
-          </div>
-        </div>
-        <SquareSpacing spacing={SpacingSize.Medium} />
-        <div className='response-container'>
-          <div className='notice'>
-            <span className='text'>目前只能显示最近的10个消息...</span>
-          </div>
-          {messages.length > 0 && messages?.sort((a: IMessage, b: IMessage) => new Date(a.created_dt).getTime() - new Date(b.created_dt).getTime())
-            .map((msg, index) => {
-              return (
-                <div key={index} className={`message-container-anchor${msg.isSender ? ' rr' : ''}`}>
-                  <div className='message-container'>
-                    <span className='message'>
-                      {msg.isSender ? null : 'GPT: '}{msg.content}
-                    </span>
+          <SquareSpacing spacing={SpacingSize.Medium} />
+          <div className='response-container'>
+            <div className='notice'>
+              <span className='text'>{copywriting.recentMessageLabel}</span>
+            </div>
+            {messages.length > 0 && messages?.sort((a: IMessage, b: IMessage) => new Date(a.created_dt).getTime() - new Date(b.created_dt).getTime())
+              .map((msg, index) => {
+                return (
+                  <div key={index} className={`message-container-anchor${msg.isSender ? ' rr' : ''}`}>
+                    <div className='message-container'>
+                      <span className='message'>
+                        {msg.isSender ? null : 'GPT: '}{msg.content}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
 
-        </div>
-        <SquareSpacing spacing={SpacingSize.Medium} />
-        <div className='request-container'>
-          <div className='form'>
-            <TextField
-              id='message'
-              fullWidth
-              size='small'
-              label='(输入一个字发送)'
-              value={payload?.message ?? ''}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => handleTextChange(event)}
-              autoComplete="off"
-            />
           </div>
-          <div className='action'>
-            <Button
-              id="btn-send"
-              onClick={() => handleSendRequest()}
-              sx={StyleButtonPrimary}
-              disabled={isButtonDisabled()}
-            >
-              发送
-            </Button>
+          <SquareSpacing spacing={SpacingSize.Medium} />
+          <div className='request-container'>
+            <div className='form'>
+              <TextField
+                id='message'
+                fullWidth
+                size='small'
+                label={copywriting.sendMessagePrompt}
+                value={payload?.message ?? ''}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => handleTextChange(event)}
+                autoComplete="off"
+              />
+            </div>
+            <div className='action'>
+              <Button
+                id="btn-send"
+                onClick={() => handleSendRequest()}
+                sx={StyleButtonPrimary}
+                disabled={isButtonDisabled()}
+              >
+                {copywriting.button.send}
+              </Button>
+            </div>
           </div>
+          <SquareSpacing spacing={SpacingSize.Large} />
         </div>
-        <SquareSpacing spacing={SpacingSize.Large} />
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

@@ -36,7 +36,6 @@ export default function RegisterPage() {
     buttonLabel: '',
     existingAccountLabel: '',
     modal: {} as any,
-
   })
 
   React.useEffect(() => {
