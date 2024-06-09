@@ -1,18 +1,18 @@
-import "../css/RegisterPage.css";
-import React, { ChangeEvent } from "react";
 import { Button, TextField } from "@mui/material";
+import React, { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
+import ModalComponent, { IModalContent } from "../components/modal/ModalComponent";
 import SquareSpacing from "../components/spacing/SquareSpacing";
 import { SpacingSize } from "../components/spacing/SquareSpacing.enum";
-import { StyleButtonPrimary } from "../styling/ButtonPrimary";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../middleware/axios-interceptor";
-import Header from "../components/header/Header";
+import "../css/RegisterPage.css";
 import { Locale } from "../enums";
+import axiosInstance from "../middleware/axios-interceptor";
+import { StyleButtonPrimary } from "../styling/ButtonPrimary";
 import { AppStorageUtil } from "../utils/AppStorageUtil";
-import Footer from "../components/footer/Footer";
-import { RegistrationUtil } from "../utils/RegistrationUtil";
 import { FormUtil } from "../utils/FormUtil";
-import ModalComponent, { IModalComponent, IModalContent } from "../components/modal/ModalComponent";
+import { RegistrationUtil } from "../utils/RegistrationUtil";
 
 
 export interface IRegisterForm {

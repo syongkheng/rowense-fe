@@ -54,6 +54,14 @@ const HomePage = () => {
     navigate("/gpt");
   }
 
+  const handleTiktokStreamWatcher = () => {
+    console.log("Tiktok")
+  }
+  const handleDouyinStreamWatcher = () => {
+    console.log("Douyin")
+  }
+
+
   const handleLogout = () => {
     AppStorageUtil.removeSession(AppStorageUtil.Keys.Jwt);
     navigate("/");
@@ -100,7 +108,7 @@ const HomePage = () => {
           <div className='action'>
             <Button
               id="gpt"
-              onClick={() => handleGpt()}
+              onClick={() => handleTiktokStreamWatcher()}
               fullWidth
               sx={StyleButtonPrimary}
             >
@@ -111,7 +119,7 @@ const HomePage = () => {
           <div className='action'>
             <Button
               id="gpt"
-              onClick={() => handleGpt()}
+              onClick={() => handleDouyinStreamWatcher()}
               fullWidth
               sx={StyleButtonPrimary}
             >
