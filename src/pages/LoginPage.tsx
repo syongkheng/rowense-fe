@@ -56,7 +56,7 @@ export default function LoginPage() {
   }
 
   const handleLogin = async () => {
-    const response = await axiosInstance.post(`/api/auth/login`, loginForm)
+     await axiosInstance.post(`/api/auth/login`, loginForm)
       .then((res) => {
         const jwt = res["data"]["data"];
         AppStorageUtil.setSession(AppStorageUtil.Keys.Jwt, jwt);
