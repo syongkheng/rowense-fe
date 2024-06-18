@@ -1,4 +1,4 @@
-export default function copywritingEn() {
+export default function copywritingCn() {
 
   const titleLabel = '欢迎';
   const subtitleLabel = '以下请选一';

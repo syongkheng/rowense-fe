@@ -54,10 +54,10 @@ const HomePage = () => {
   }
 
   const handleTiktokStreamWatcher = () => {
-    console.log("Tiktok")
+    navigate("/tt-stream-watch");
   }
   const handleDouyinStreamWatcher = () => {
-    console.log("Douyin")
+    navigate("/dy-stream-watch");
   }
 
   const handleLogout = () => {

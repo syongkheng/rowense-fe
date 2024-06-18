@@ -65,8 +65,7 @@ export default function LoginPage() {
         console.log("Catch: ", JSON.stringify(err));
       });
 
-    console.log("My resposne is: ", response);
-  }
+   }
 
   const handleRegister = () => {
     navigate('/register')

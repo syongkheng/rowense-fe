@@ -11,6 +11,8 @@ import GptPage from "./pages/GptPage";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import TtStreamWatcherPage from "./pages/TtStreamWatcherPage";
+import DyStreamWatcherPage from "./pages/DyStreamWatcherPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/gpt",
         element: <GptPage />,
+      },
+      {
+        path: "/tt-stream-watch",
+        element: <TtStreamWatcherPage />,
+      },
+      {
+        path: "/dy-stream-watch",
+        element: <DyStreamWatcherPage />,
       },
     ],
   },

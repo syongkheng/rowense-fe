@@ -10,6 +10,7 @@
   align-items: center;
   background-color: #dedede;
   opacity: 0.9;
+  z-index: 9999;
 
   >.content {
     display: flex;
