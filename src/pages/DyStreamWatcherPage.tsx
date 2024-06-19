@@ -114,8 +114,6 @@ export default function DyStreamWatcherPage() {
             }));
           }
         });
-        console.log("Res: ", res);
-        console.log("Keys: ", Object.keys(data));
       }).catch((err) => {
         console.error("Error: ", err);
       })
@@ -153,7 +151,7 @@ export default function DyStreamWatcherPage() {
             </div>
           </div>
           <SquareSpacing spacing={SpacingSize.Medium} />
-          <div className='row' style={{ display: 'flex', flexDirection: 'row' }}>
+          <div className='row user-options'>
             <div>
               <TextField
                 id='accountId'

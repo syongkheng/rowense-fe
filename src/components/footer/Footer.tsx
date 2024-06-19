@@ -5,7 +5,7 @@ import "../../css/components/Footer.css";
 export default function Footer() {
 
   const VERSION = 'Beta';
-  const LAST_UPDATED_DATE = '2024-06-02';
+  const LAST_UPDATED_DATE = '2024-06-19';
   const DISCORD_INVITE_LINK = 'https://discord.gg/SWYvkQNtmp';
 
   return (

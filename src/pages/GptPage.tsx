@@ -75,7 +75,7 @@ const GptPage = () => {
 
   const handleSendRequest = async () => {
     await setIsLoading(true);
-    await axiosInstance.post(`${import.meta.env.VITE_APP_URL}/gpt`, { payload })
+    await axiosInstance.post(`${import.meta.env.VITE_APP_URL}/api/v1/gpt`, { payload })
       .then((res) => {
         console.log("Test:", res["data"]["data"])
       }).catch((err) => {
