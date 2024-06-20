@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# qin' Studio
+Playground application with the following functionalities:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Virtual Assistant v0.0.0-beta
 
-Currently, two official plugins are available:
+Talk with an Artificial Intelligence powered by OpenAI's GPT-3.5 Turbo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Limitations:
 
-## Expanding the ESLint configuration
+1) Responses are capped to a maximum of 1000 tokens.
+2) Conversations are contextless with no memory
+3) Only the recent 10 messages are retrieved
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tiktok Livestream Watcher v0.0.0-beta
 
-- Configure the top-level `parserOptions` property like this:
+Retrieves the following information from a Tiktok handler:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1) If user has every live streamed before.
+2) Following/Follower count.
+3) Livestream status.
+4) Last recorded livestream title.
+5) Last recorded livestream viewers.
+6) Timestamp for when the most recent livestream went live.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Douyin Livestream Watcher v0.0.0-beta
+
+Retrieves the following information from a Douyin account id.
+
+1) Livestream status.
+2) (If online) Current livestream like count.
+3) (If online) Current livestream viewers.
+4) (If online) Total number of viewers since stream was live.
