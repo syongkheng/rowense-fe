@@ -1,9 +1,18 @@
 import { Locale } from "../enums";
 import { IRegisterForm } from "../pages/RegisterPage";
 
+/**
+ * Utility functions for Registration Flow
+ */
 export namespace RegistrationUtil {
 
-
+  /**
+   * Validates the registration form to ensure all input is valid.
+   * 
+   * @param form - The entire registration form
+   * @param locale - Language for prompts or error messages
+   * @returns - A string array with error message, empty if form is valid
+   */
   export async function validateForm(form: IRegisterForm, locale: Locale): Promise<string[]> {
     return new Promise<string[]>(async (resolve, _) => {
       const errorList: string[] = [];

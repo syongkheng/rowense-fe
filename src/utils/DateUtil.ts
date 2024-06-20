@@ -1,4 +1,13 @@
+/**
+ * Utility functions for dealing with date conversion.
+ */
 export namespace DateUtil {
+
+  /**
+   * Converts unix timestamp to DD/MM/YYYY HH:MM
+   * @param timestamp - must of of number type
+   * @returns - date string in DD/MM/YYYY HH:MM 12H format
+   */
   export function convertUnixToDDMMYYYYHHMM(timestamp: number) {
     // Create a new JavaScript Date object based on the timestamp
     const date = new Date(timestamp * 1000);
