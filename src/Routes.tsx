@@ -1,9 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import Root from "./root";
 import * as Page from "./pages";
 
-export const router = createBrowserRouter([
+export const Router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
@@ -40,3 +39,5 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+export default Router;
