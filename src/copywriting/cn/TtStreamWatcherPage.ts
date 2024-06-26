@@ -1,7 +1,8 @@
 export default function copywritingCn() {
 
   const titleLabel = 'TikTok直播间观察者';
-  const instructionLabel = '账号ID可以从用户主页获取,请看图片:';
+  const instructionLabel = '说明';
+  const instructionStepOne = '请输入账号ID (@xxx)';
   const options: Record<string, any> = {
     title: '可获取的资料',
     label: {
@@ -44,6 +45,7 @@ export default function copywritingCn() {
   return {
     titleLabel,
     instructionLabel,
+    instructionStepOne,
     options,
     response,
     button,

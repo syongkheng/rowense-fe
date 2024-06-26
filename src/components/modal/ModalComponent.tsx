@@ -13,7 +13,8 @@ export interface IModalComponent extends IModalContent {
 
 export interface IModalContent {
   title: string | undefined;
-  bodyContent: string[] | undefined;
+  bodyContent: (any)[] | undefined;
+  cancelButtonOnly?: boolean;
   successButtonLabel?: string;
   cancelButtonLabel?: string;
   onSuccessHandler?: React.MouseEventHandler<HTMLButtonElement>;
@@ -21,8 +22,9 @@ export interface IModalContent {
 export default function ModalComponent({
   show,
   setShow,
-  title = "Title//标题标题",
+  title = "Title/标题标题",
   bodyContent = ["Content/内容"],
+  cancelButtonOnly = false,
   cancelButtonLabel = 'Cancel/返回',
   successButtonLabel = 'Confirm/确认',
   onSuccessHandler,
@@ -40,38 +42,50 @@ export default function ModalComponent({
         <SquareSpacing spacing={SpacingSize.Large} />
         {
           bodyContent.length > 0 && bodyContent.map((content, index) => {
+
             return (
               <div key={index}>
-                <div>
-                  {content}
-                </div>
+                {content}
                 <SquareSpacing spacing={SpacingSize.Small} />
               </div>
             )
           })
         }
         <SquareSpacing spacing={SpacingSize.Large} />
-        <div className="button-container">
-          <div>
+        {
+          cancelButtonOnly
+            ? (
+              <div>
+                <Button
+                  onClick={handleCloseButton}
+                  sx={StyleButtonSecondary}
+                >
+                  {cancelButtonLabel}
+                </Button>
+              </div>
+            )
+            : (<div className="button-container">
+              <div>
+                <Button
+                  onClick={handleCloseButton}
+                  sx={StyleButtonSecondary}
+                >
+                  {cancelButtonLabel}
+                </Button>
+              </div>
+              <SquareSpacing spacing={SpacingSize.Large} />
+              <div>
 
-            <Button
-              onClick={handleCloseButton}
-              sx={StyleButtonSecondary}
-            >
-              {cancelButtonLabel}
-            </Button>
-          </div>
-          <SquareSpacing spacing={SpacingSize.Large} />
-          <div>
+                <Button
+                  onClick={onSuccessHandler}
+                  sx={StyleButtonPrimary}
+                >
+                  {successButtonLabel}
+                </Button>
+              </div>
+            </div>)
+        }
 
-            <Button
-              onClick={onSuccessHandler}
-              sx={StyleButtonPrimary}
-            >
-              {successButtonLabel}
-            </Button>
-          </div>
-        </div>
       </div>
     </Modal >
   )

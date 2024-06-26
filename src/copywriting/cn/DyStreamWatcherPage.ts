@@ -1,29 +1,23 @@
 export default function copywritingCn() {
 
   const titleLabel = '抖音直播间观察者';
-  const instructionLabel = '账号ID可以从用户主页获取,请看图片:';
+  const instructionLabel = '说明';
+  const instruction: Record<string, any> = {
+    stepOne: '账号ID能以图里获取: ',
+  }
+  
   const options: Record<string, any> = {
-    title: '可获取的资料',
-    label: {
-      isStreaming: '直播间是否在线',
-      totalViewership: '总观看数',
-      currentViewership: '在线观看数',
-      currentLikeCount: '真时点赞量',
-    },
     prompt: '账号ID',
   }
+
   const response: Record<string, any> = {
-    title: '获取到的资料',
-    nickname: '账号名: ',
-    userId: '独特ID: ',
-    secUid: '备用独特ID: ',
-    streamStatus: '直播间是否在线: ',
-    online: '在线',
+    title: '回应',
+    roomStatus: '直播间状况',
+    online: '正在直播',
     offline: '不在线',
-    totalViewers: '总观看数: ',
-    currentViewers: '在线观看数: ',
-    currentLikeCount: '真时点赞量: ',
-    notAvailable: '直播间不在线,数据暂时不能获取',
+    currentLikeCount: '目前点赞量: ',
+    totalViewerCount: '观看人数(累计): ',
+    currentViewerCount: '观看人数(目前): ',
   }
 
   const button: Record<string, any> = {
@@ -32,9 +26,12 @@ export default function copywritingCn() {
   }
 
 
+
+
   return {
     titleLabel,
     instructionLabel,
+    instruction,
     options,
     response,
     button,

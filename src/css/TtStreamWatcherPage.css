@@ -9,57 +9,26 @@
   color: #333333;
 
   >.content-container {
-    min-width: 50vw;
-    max-width: 80vw;
+    min-width: 600px;
 
-    >.response-container {
+    >.tt-response-container {
       display: flex;
       flex-direction: column;
 
-
-      >.identity-container {
-        display: flex;
-        flex-direction: row;
-
-        >.avatar {
-          padding-right: 2vw;
-        }
-
-        >.details {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-
-          >.top {
-            display: flex;
-            flex-direction: row;
-
-            >.left {
-              padding-right: 2vw;
-            }
-          }
-        }
-      }
-
-      >.stream-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
     }
 
     >.row {
       >.title {
         font-size: 24px;
       }
-
-      >div {
-        >.instruction-label {
-          font-size: 16px;
-        }
-      }
     }
   }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2vw;
 }
 
 .subtitle {
@@ -71,9 +40,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
-
-
 }
 
 .title-container {
@@ -85,4 +51,24 @@
 .user-options {
   display: flex;
   flex-direction: row;
+}
+
+.follow-info {
+  display: flex;
+  flex-direction: row;
+
+  >.following {
+    display: flex;
+    flex-direction: row;
+    min-width: 160px;
+  }
+
+  >.follower {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.response-container-min-height {
+  min-height: 250px;
 }

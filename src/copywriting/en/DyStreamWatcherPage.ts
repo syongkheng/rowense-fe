@@ -1,29 +1,21 @@
 export default function copywritingEn() {
 
   const titleLabel = 'Douyin Livestream Watcher';
-  const instructionLabel = 'Account ID can be retrieved from the user\'s profile page as shown:';
+  const instructionLabel = 'Usage';
+  const instruction: Record<string, any> = {
+    stepOne: 'Account ID can be retrieved as shown: ',
+  }
   const options: Record<string, any> = {
-    title: 'Retrievable Information',
-    label: {
-      isStreaming: 'Stream Status',
-      totalViewership: 'Total Views',
-      currentViewership: 'Current No. of Viewers',
-      currentLikeCount: 'Current No. of Likes',
-    },
     prompt: 'Account ID',
   }
   const response: Record<string, any> = {
-    title: 'Retrieved Information',
-    nickname: 'Nickname: ',
-    userId: 'Unique ID: ',
-    secUid: 'Secondary Unique ID: ',
-    streamStatus: 'Stream Status: ',
+    title: 'Response',
+    roomStatus: 'Stream Status',
     online: 'Online',
     offline: 'Offline',
-    totalViewers: 'Total Views: ',
-    currentViewers: 'Current No. of Viewers: ',
-    currentLikeCount: 'Current No. of Likes: ',
-    notAvailable: 'Not available as stream is offline.',
+    currentLikeCount: 'Likes(Current): ',
+    totalViewerCount: 'Viewers(Total): ',
+    currentViewerCount: 'Viewers(Current): ',
   }
 
   const button: Record<string, any> = {
@@ -34,6 +26,7 @@ export default function copywritingEn() {
   return {
     titleLabel,
     instructionLabel,
+    instruction,
     options,
     response,
     button,

@@ -1,7 +1,8 @@
 export default function copywritingEn() {
 
   const titleLabel = 'Tiktok Livestream Watcher';
-  const instructionLabel = 'Account ID can be retrieved from the user\'s profile page as shown:';
+  const instructionLabel = 'Usage';
+  const instructionStepOne = 'Enter the account\'s handler (@xxx)';
   const options: Record<string, any> = {
     title: 'Retrievable Information',
     label: {
@@ -25,8 +26,8 @@ export default function copywritingEn() {
     followingCount: 'Followings: ',
     followerCount: 'Followers: ',
     lastStreamTitle: 'Latest livestream title: ',
-    lastStreamStartTime: 'Latest livestream start time (GMT + 8): ',
-    lastRecordedViewers: 'Latest viewer count: ',
+    lastStreamStartTime: 'Start(SGT): ',
+    lastRecordedViewers: 'Viewers: ',
     error: {
       1: "User has never streamed before.",
     },
@@ -41,6 +42,7 @@ export default function copywritingEn() {
   return {
     titleLabel,
     instructionLabel,
+    instructionStepOne,
     options,
     response,
     button,

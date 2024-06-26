@@ -1,8 +1,11 @@
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Button, TextField } from '@mui/material';
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
+import LoadingComponent from '../components/loader/LoadingComponent';
+import TtProfileResponse from '../components/response/TtProfileResponse';
 import SquareSpacing from '../components/spacing/SquareSpacing';
 import { SpacingSize } from '../components/spacing/SquareSpacing.enum';
 import '../css/TtStreamWatcherPage.css';
@@ -11,8 +14,7 @@ import axiosInstance from '../middleware/axios-interceptor';
 import { StyleButtonPrimary } from '../styling/ButtonPrimary';
 import { StyleButtonSecondary } from '../styling/ButtonSecondary';
 import { AppStorageUtil } from '../utils/AppStorageUtil';
-import { DateUtil } from '../utils/DateUtil';
-import LoadingComponent from '../components/loader/LoadingComponent';
+import ModalComponent from '../components/modal/ModalComponent';
 
 interface FormState {
   accountId: string;
@@ -25,6 +27,8 @@ interface TikTokStreamReponse {
   secUid: string,
   uniqueId: string,
   avatarUrl: string,
+  profileUrl: string,
+  streamUrl: string,
   followingCount: string,
   followerCount: string,
   isStreaming: boolean | string,
@@ -40,16 +44,14 @@ export default function TtStreamWatcherPage() {
 
   const [loading, setLoading] = React.useState<boolean>(false);
   const [locale, setLocale] = React.useState<string>(AppStorageUtil.getLocal(AppStorageUtil.Keys.Locale) ?? Locale.en);
-  const [showResponse, setShowResponse] = React.useState<Record<TiktokKey, boolean>>({
-    [TiktokKey.isStreaming]: false,
-    [TiktokKey.error]: false,
-  });
   const [streamInfo, setStreamInfo] = React.useState<TikTokStreamReponse>({
     nickname: '',
     userId: '',
     secUid: '',
     uniqueId: '',
     avatarUrl: '',
+    profileUrl: '',
+    streamUrl: '',
     followingCount: '',
     followerCount: '',
     isStreaming: false,
@@ -61,6 +63,7 @@ export default function TtStreamWatcherPage() {
     loading: true as boolean,
     titleLabel: '',
     instructionLabel: '',
+    instructionStepOne: '',
     options: {} as any,
     response: {} as any,
     button: {} as any,
@@ -71,13 +74,16 @@ export default function TtStreamWatcherPage() {
     keysToRetrieve: [TiktokKey.isStreaming],
   });
 
-  const [showResponseContent, setShowResponseContent] = React.useState<boolean>(false); // State to control showing response content
+  const [showResponse, setShowResponse] = React.useState<boolean>(false); // State to control showing response content
+  const [showError, setShowError] = React.useState<boolean>(false);
+  const [showInstruction, setShowInstruction] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     import(`../copywriting/${locale}/TtStreamWatcherPage.ts`).then((module) => {
       const {
         titleLabel,
         instructionLabel,
+        instructionStepOne,
         options,
         response,
         button,
@@ -86,6 +92,7 @@ export default function TtStreamWatcherPage() {
         loading: false,
         titleLabel,
         instructionLabel,
+        instructionStepOne,
         options,
         response,
         button,
@@ -112,18 +119,17 @@ export default function TtStreamWatcherPage() {
       return;
     }
     setLoading(true);
+    setShowResponse(false);
+    setShowError(false);
     axiosInstance.post("/api/v1/tt", form)
       .then((res) => {
         const data = res.data.data as TikTokStreamReponse;
         if (Object.keys(data).includes("error")) {
-          setShowResponse((prevForm) => ({
-            ...prevForm,
-            [TiktokKey.error]: true,
-          }));
           setStreamInfo((prevForm) => ({
             ...prevForm,
             error: data.code,
           }));
+          setShowError(true);
           return;
         }
         setStreamInfo({
@@ -132,6 +138,8 @@ export default function TtStreamWatcherPage() {
           secUid: data.secUid,
           uniqueId: data.uniqueId,
           avatarUrl: data.avatarUrl,
+          profileUrl: data.profileUrl,
+          streamUrl: data.streamUrl,
           followingCount: data.followingCount,
           followerCount: data.followerCount,
           isStreaming: data.isStreaming,
@@ -139,26 +147,22 @@ export default function TtStreamWatcherPage() {
           lastStreamStartTime: data.lastStreamStartTime,
           viewers: data.viewers,
         });
-        Object.keys(data).forEach(key => {
-          if (showResponse.hasOwnProperty(key)) {
-            setShowResponse(prevShowResponse => ({
-              ...prevShowResponse,
-              [key]: true,
-              [TiktokKey.error]: false,
-            }));
-          }
-        });
+        setShowResponse(true);
       }).catch((err) => {
         console.error("Error: ", err);
+        setShowError(true);
       }).finally(() => {
         console.log("SI: ", streamInfo);
         setLoading(false);
-        setShowResponseContent(true); // Hide response content on error
       })
   }
 
   const handleBack = () => {
     navigate(-1);
+  }
+
+  const handleUsage = () => {
+    setShowInstruction(true);
   }
 
   return (
@@ -201,71 +205,51 @@ export default function TtStreamWatcherPage() {
           </div>
           <SquareSpacing spacing={SpacingSize.Medium} />
           <div className='row'>
-            <span className='subtitle'>{copywriting.response.title}</span>
+            <div>
+              <span className='instruction-label vertical-center hyperlink' onClick={() => handleUsage()}>
+                {copywriting.instructionLabel}
+                {<ArrowRightAltIcon />}
+              </span>
+            </div>
           </div>
           <SquareSpacing spacing={SpacingSize.Medium} />
-          <div className='row response-container'>
+          {
+            showResponse || showError &&
+            <div className='row'>
+              <span className='subtitle'>{copywriting.response.title}</span>
+            </div>
+          }
+          <SquareSpacing spacing={SpacingSize.Medium} />
+          <div className='response-container-min-height'>
             {
-              showResponseContent &&  // Conditionally render based on showResponseContent state
-              (
-                showResponse.error
-                  ? (
-                    <div>{copywriting.response.error[streamInfo.error ?? 0]}</div>
-                  )
-                  : (
-                    <>
-                      <div className='identity-container'>
-                        <div className='avatar'>
-                          <img src={streamInfo.avatarUrl} height={'100px'} width={'100px'} />
-                        </div>
-                        <div className='details'>
-                          <div className='top'>
-                            <div className='left'>
-                              <div>
-                                <span>{copywriting.response.nickname}{streamInfo.nickname}</span>
-                              </div>
-                              <div>
-                                <span>{copywriting.response.uniqueId}{streamInfo.uniqueId}</span>
-                              </div>
-                            </div>
-                            <div className='right'>
-                              <div>
-                                <span>{copywriting.response.followingCount}{streamInfo.followingCount}</span>
-                              </div>
-                              <div>
-                                <span>{copywriting.response.followerCount}{streamInfo.followerCount}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className='bottom'>
-                            <div>
-                              <span>{copywriting.response.streamStatus}{streamInfo.isStreaming ? copywriting.response.online : copywriting.response.offline}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <SquareSpacing spacing={SpacingSize.Small} />
-                      <div className='stream-container'>
-                        <div>
-                          <span>{copywriting.response.lastStreamTitle}{streamInfo.lastStreamTitle === "" ? "\"\"" : streamInfo.lastStreamTitle}</span>
-                        </div>
-                        <div>
-                          <span>{copywriting.response.lastStreamStartTime}{streamInfo.lastStreamStartTime ? DateUtil.convertUnixToDDMMYYYYHHMM(parseInt(streamInfo.lastStreamStartTime)) : 'Unknown'}</span>
-                        </div>
-                        <div>
-                          <span>{copywriting.response.lastRecordedViewers}{streamInfo.viewers}</span>
-                        </div>
-                        <div>
-                        </div>
-                      </div>
-                    </>
-                  )
-              )
+              showResponse &&
+              <TtProfileResponse
+                copywriting={copywriting}
+                streamInfo={streamInfo}
+              />
+            }
+
+            {
+              showError &&
+              <div>
+                {streamInfo.error
+                  ? copywriting.response.error[streamInfo.error]
+                  : 'An unexpected error has occured. Please try again.'}
+              </div>
             }
           </div>
         </div>
       </div>
       <Footer />
+      <ModalComponent
+        show={showInstruction}
+        setShow={setShowInstruction}
+        title={copywriting.instructionLabel}
+        bodyContent={[
+         copywriting.instructionStepOne,
+        ]}
+        cancelButtonOnly
+      />
       <LoadingComponent show={loading} />
     </>
   )
