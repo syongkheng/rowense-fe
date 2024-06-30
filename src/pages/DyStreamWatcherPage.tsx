@@ -142,7 +142,7 @@ export default function DyStreamWatcherPage() {
   return (
     <>
       <Header setLocale={setLocale} />
-      <div className='dy-stream-watcher-page-container'>
+      <div className='page-container'>
         <div className='content-container'>
           <div className='row title-container'>
             <div className='title'>
@@ -213,7 +213,7 @@ export default function DyStreamWatcherPage() {
         title={copywriting.instructionLabel}
         bodyContent={[
           copywriting.instruction.stepOne,
-          <img src={SamplePhoto} height='100px' />
+          <img src={SamplePhoto} className='sample-image'/>
         ]}
         cancelButtonOnly
       />

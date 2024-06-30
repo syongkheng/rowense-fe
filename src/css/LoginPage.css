@@ -1,25 +1,18 @@
-.landing-page-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #efefef;
-  color: #333333;
-
-  >.login-modal {
+  .login-modal {
     display: flex;
     flex-direction: column;
+    min-width: 200px;
     width: 25vw;
     max-width: 25vw;
-    padding: 2vw 2vh;
     border-radius: 6px;
     justify-content: center;
 
     >.title-container {
+      text-align: left;
       >.title-text {
         color: #333333;
         font-size: 24px;
+        width: fit-content;
       }
     }
 
@@ -28,18 +21,17 @@
       justify-content: center;
     }
 
-    >.register-container{
+    >.register-container {
       display: flex;
       justify-content: center;
     }
   }
-}
 
-@media (max-width: 586px) {
-  .landing-page-container {
-    >.login-modal {
-      width: 80vw;
-      max-width: 80vw;
+  @media (max-width: 586px) {
+    .login-page-container {
+      >.login-modal {
+        min-width: 200px;
+        max-width: 80vw;
+      }
     }
   }
-}

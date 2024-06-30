@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./root";
 import * as Page from "./pages";
+import App from "./App";
 
 export const Router = createBrowserRouter([
   {
@@ -35,7 +36,10 @@ export const Router = createBrowserRouter([
       {
         path: "/dy-stream-watch",
         element: <Page.DyStreamWatcher />,
-      },
+      }, {
+        path: "/test",
+        element: <App />
+      }
     ],
   },
 ]);

@@ -168,7 +168,7 @@ export default function TtStreamWatcherPage() {
   return (
     <>
       <Header setLocale={setLocale} />
-      <div className='stream-watcher-page-container'>
+      <div className='page-container'>
         <div className='content-container'>
           <div className='row title-container'>
             <div className='title'>

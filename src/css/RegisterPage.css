@@ -1,4 +1,4 @@
-.landing-page-container {
+.register-page-container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -42,7 +42,7 @@
 }
 
 @media (max-width: 586px) {
-  .landing-page-container {
+  .register-page-container {
     >.login-modal {
       width: 80vw;
       max-width: 80vw;

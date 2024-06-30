@@ -128,7 +128,7 @@ export default function RegisterPage() {
   return (
     <>
       <Header setLocale={setLocale} />
-      <div className="landing-page-container">
+      <div className="page-container">
         <div className="login-modal">
           <div className="title-container">
             <span className="title-text">

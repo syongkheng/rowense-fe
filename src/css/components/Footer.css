@@ -2,7 +2,6 @@
   position: relative;
   bottom: 0;
   left: 0;
-  width: 100vw;
   display: flex;
   justify-content: center;
   border-top: 1px solid;
@@ -10,6 +9,7 @@
   height: 75px;
   align-items: center;
   opacity: 0.9;
+  padding: 0 2vw;
 
   >.content {
     display: flex;
@@ -17,6 +17,11 @@
     width: 100%;
     max-width: 1080px;
     font-size: 16px;
+
+    >.primary {
+      display: flex;
+      flex-direction: row;
+    }
 
     >.secondary {
       display: flex;

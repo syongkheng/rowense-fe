@@ -30,7 +30,7 @@ const GptPage = () => {
     titleLabel: '',
     recentMessageLabel: '',
     sendMessagePrompt: '',
-    button: {} as any, 
+    button: {} as any,
   });
 
   React.useEffect(() => {
@@ -113,7 +113,7 @@ const GptPage = () => {
   return (
     <>
       <Header setLocale={setLocale} />
-      <div className='gpt-page-container'>
+      <div className='page-container'>
         <div className='dialog-container'>
           <div className='title-container'>
             <div className='title'>
@@ -141,7 +141,7 @@ const GptPage = () => {
                   <div key={index} className={`message-container-anchor${msg.isSender ? ' rr' : ''}`}>
                     <div className='message-container'>
                       <span className='message'>
-                        {msg.isSender ? null : 'GPT: '}{msg.content}
+                        {msg.content}
                       </span>
                     </div>
                   </div>

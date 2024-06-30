@@ -1,3 +1,11 @@
+.page-container{
+  display: flex;
+  width: 100vw;
+  min-height: calc(100vh - 60px - 76px);
+  justify-content: center;
+  align-items: center;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -43,8 +51,24 @@
   align-items: center;
 }
 
+.horizontal-center {
+  display: flex;
+  justify-content: center;
+}
+
+.text-left{
+  text-align: left;
+}
+
 .hyperlink {
   color: #646cff;
   cursor: pointer; /* Pointer cursor on hover */
 }
 
+.MuiDrawer-paperAnchorBottom{
+  border-radius: 8px 8px 0 0;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}

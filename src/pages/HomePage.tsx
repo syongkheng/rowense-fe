@@ -5,7 +5,6 @@ import SquareSpacing from '../components/spacing/SquareSpacing';
 import { SpacingSize } from '../components/spacing/SquareSpacing.enum';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
-import { StyleButtonSecondary } from "../styling/ButtonSecondary";
 import { AppStorageUtil } from "../utils/AppStorageUtil";
 import React from "react";
 import { Locale } from "../enums";
@@ -60,15 +59,11 @@ const HomePage = () => {
     navigate("/dy-stream-watch");
   }
 
-  const handleLogout = () => {
-    AppStorageUtil.removeSession(AppStorageUtil.Keys.Jwt);
-    navigate("/");
-  }
 
   return (
     <>
       <Header setLocale={setLocale} />
-      <div className='home-page-container'>
+      <div className='page-container'>
         <div className='menu'>
           <div className='title-container'>
             <div className="info-box">
@@ -79,16 +74,6 @@ const HomePage = () => {
               <span className='description'>
                 {copywriting.subtitleLabel}
               </span>
-            </div>
-            <div className="actions">
-              <Button
-                id="logout"
-                onClick={() => handleLogout()}
-                fullWidth
-                sx={StyleButtonSecondary}
-              >
-                {copywriting.button.logout}
-              </Button>
             </div>
           </div>
           <SquareSpacing spacing={SpacingSize.Large} />

@@ -34,7 +34,7 @@ export default function LandingPage() {
   return (
     <>
       <Header setLocale={setLocale} />
-      <div className='login-page-container'>
+      <div className='page-container'>
         <div className='content'>
           <SquareSpacing spacing={SpacingSize.ExtraLarge} />
           {
@@ -42,7 +42,7 @@ export default function LandingPage() {
               return (
                 <div className='row' key={index}>
                   <div className='section-container'>
-                    <div>
+                    <div className='text-left'>
                       <span className={`section h${index === 0 ? '1' : '2'}`}>
                         {section.title}
                       </span>
@@ -50,7 +50,7 @@ export default function LandingPage() {
                         {section.version}
                       </span>
                     </div>
-                    <div>
+                    <div className='text-left'>
                       <span className='section content'>
                         {section.description}
                       </span>

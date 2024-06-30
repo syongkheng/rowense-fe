@@ -1,127 +1,129 @@
-.gpt-page-container {
-  width: 100vw;
-  height: 100vh;
+.dialog-container {
   display: flex;
+  flex-direction: column;
+  max-width: 1080px;
+  background-color: #ffffff;
+  padding: 0 2vw;
+  padding-top: 2vh;
+  border-radius: 6px;
   justify-content: center;
-  align-items: center;
-  background-color: #efefef;
-  color: #333333;
 
-  >.dialog-container {
+  >.title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    >.title {
+      color: #333333;
+      display: flex;
+      font-size: 24px;
+    }
+
+    >.secondary-action {
+      display: flex;
+    }
+  }
+
+  >.response-container {
+    min-height: 60vh;
+    height: 60vh;
+    border: 1px solid;
+    border-color: #333333;
+    border-radius: 5px;
+    overflow: auto;
+    padding: 1vh 2vw;
     display: flex;
     flex-direction: column;
-    width: 80vw;
-    max-width: 1080px;
-    background-color: #ffffff;
-    padding: 0 2vw;
-    padding-top: 2vh;
-    border-radius: 6px;
-    justify-content: center;
 
-    >.title-container {
+    >.notice {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
 
-      >.title {
+      >.text {
         color: #333333;
-        display: flex;
-        font-size: 24px;
-      }
-
-      >.secondary-action {
-        display: flex;
       }
     }
 
-    >.response-container {
-      min-height: 60vh;
-      height: 60vh;
-      border: 1px solid;
-      border-color: #333333;
-      border-radius: 5px;
-      overflow: auto;
-      padding: 1vh 1vw;
+    >.message-container-anchor {
+      padding-top: 1vh;
+      padding-bottom: 1vh;
       display: flex;
-      flex-direction: column;
+      width: 100%;
 
-      >.notice {
+      &.rr {
+        flex-direction: row-reverse;
+
+        >.message-container {
+          border: 1px solid;
+          border-color: #333333;
+        }
+      }
+
+      >.message-container {
         display: flex;
-        justify-content: center;
+        width: fit-content;
+        max-width: 600px;
+        padding: 1vh 1vw;
 
-        >.text {
+        border-radius: 5px;
+        text-align: left;
+
+        >.message {
           color: #333333;
         }
       }
 
-      >.message-container-anchor {
-        padding-top: 1vh;
-        padding-bottom: 1vh;
-        display: flex;
-
-        &.rr {
-          flex-direction: row-reverse;
-        }
-
-        >.message-container {
-          display: flex;
-          width: fit-content;
-          max-width: 600px;
-          padding: 1vh 1vw;
-          border: 1px solid;
-          border-color: #333333;
-          border-radius: 5px;
-
-          >.message {
-            color: #333333;
-          }
-        }
-
-        >.sender {
-          flex-direction: row-reverse;
-        }
+      >.sender {
+        flex-direction: row-reverse;
       }
+    }
+  }
+
+  >.request-container {
+    display: flex;
+
+    >.form {
+      display: flex;
+      width: 100%;
+      padding-right: 1vw;
+    }
+
+    >.action {
+      display: flex;
+    }
+  }
+}
+
+
+@media (max-width: 586px) {
+
+  .dialog-container {
+    >.response-container {
+      min-height: 50vh;
+      height: 60vh;
     }
 
     >.request-container {
       display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
 
       >.form {
         display: flex;
         width: 100%;
-        padding-right: 2vw;
       }
 
       >.action {
         display: flex;
+        justify-content: center;
+        margin-top: 2vh;
       }
     }
   }
 }
 
-@media (max-width: 586px) {
-  .gpt-page-container {
-    >.dialog-container {
-      >.response-container {
-        min-height: 50vh;
-        height: 50vh;
-      }
-
-      >.request-container {
-        flex-direction: column;
-        justify-content: center;
-
-        >.form {
-          display: flex;
-          width: 100%;
-          padding-right: 2vw;
-        }
-
-        >.action {
-          display: flex;
-          justify-content: center;
-        }
-      }
-    }
-  }
+.sample-image {
+  max-height: 100px;
+  max-width: 100%;
 }
