@@ -6,6 +6,7 @@ export default function copywritingEn() {
   const button = {
     return: 'Back',
     send: 'Send',
+    loading: 'typing...',
   }
 
   return {

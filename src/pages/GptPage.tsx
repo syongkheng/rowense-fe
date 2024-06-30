@@ -55,7 +55,6 @@ const GptPage = () => {
     message: ''
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
   const [messages, setMessages] = React.useState<IMessage[]>([]);
 
   function isPayloadMessageEmpty() {
@@ -169,7 +168,9 @@ const GptPage = () => {
                 sx={StyleButtonPrimary}
                 disabled={isButtonDisabled()}
               >
-                {copywriting.button.send}
+                { isLoading 
+                  ? copywriting.button.loading
+                  : copywriting.button.send}
               </Button>
             </div>
           </div>

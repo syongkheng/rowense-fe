@@ -6,6 +6,7 @@ export default function copywritingCn() {
   const button = {
     return: '返回',
     send: '发送',
+    loading: '助理增在输入...',
   }
 
   return {
